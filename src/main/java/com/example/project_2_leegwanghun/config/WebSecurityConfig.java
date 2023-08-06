@@ -28,7 +28,8 @@ public class WebSecurityConfig {
                                 .requestMatchers(
                                         "/users/register",
                                         "/users/login",
-                                        "/static/**"
+                                        "/static/**",
+                                        "/article/list"
                                 )
                                 .permitAll()
                                 .anyRequest()

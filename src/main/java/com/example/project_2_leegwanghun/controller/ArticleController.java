@@ -44,7 +44,7 @@ public class ArticleController {
     }
 
     // 피드 목록 조회
-    @GetMapping("/articleList")
+    @GetMapping("/list")
     public Page<ArticleDto> readAll(
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "limit", defaultValue = "20") Integer limit
@@ -53,7 +53,46 @@ public class ArticleController {
         return articleService.readArticlePaged(page, limit);
     }
 
-
-
     // 피드 단독 조회
+    @GetMapping("/{articleId}")
+    public ArticleDto readOne(
+            @PathVariable Long articleId
+    ) {
+        ArticleDto articleDto = articleService.readArticleOne(articleId);
+        articleDto.setArticleImg(null);
+        return articleService.readArticleOne(articleId);
+    }
+
+    // 피드 수정
+    @PutMapping("/{articleId}")
+    public ResponseDto update(
+            @PathVariable Long articleId,
+            @RequestBody ArticleDto articleDto
+    ) {
+        articleService.updateArticle(articleId, articleDto);
+        response.setMessage("피드가 수정되었습니다.");
+        return response;
+    }
+
+    // 피드 이미지 추가/삭제
+    @PutMapping("/{articleId}/image")
+    public ResponseDto updateImage(
+            @PathVariable Long articleId,
+            @RequestPart(value = "updateImage", required = false) MultipartFile articleImage,
+            @RequestPart(value = "deleteImage", required = false) Long articleImageId
+    ) {
+        articleService.updateArticleImage(articleId, articleImage, articleImageId);
+        response.setMessage("피드가 수정되었습니다.");
+        return response;
+    }
+
+    // 피드 삭제 (soft delete)
+    @DeleteMapping("/{articleId}")
+    public ResponseDto deleteArticle(
+            @PathVariable Long articleId
+    ) {
+        articleService.deleteArticle(articleId);
+        response.setMessage("피드가 삭제되었습니다.");
+        return response;
+    }
 }

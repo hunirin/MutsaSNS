@@ -16,24 +16,28 @@ public class ArticleDto {
     private String title;
     private String content;
 
-    @JsonIgnore
-    private String deletedAt;
+    @JsonInclude(JsonInclude.Include.NON_NULL)
+    private boolean deletedAt;
 
     // 작성자 정보 저장용
     private String username;
 
     // 피드 전체 이미지
-    @JsonIgnore
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private List<ArticleImageDto> articleImages;
 
     // 피드 대표 이미지
+    @JsonInclude(JsonInclude.Include.NON_NULL)
     private String articleImg;
+
+    // 피드 삭제 이미지
+    @JsonIgnore
+    private List<Long> imagesToDelete;
 
     public ArticleEntity newEntity(UserEntity user) {
         ArticleEntity entity = new ArticleEntity();
         entity.setTitle(title);
         entity.setContent(content);
-        entity.setDeletedAt(deletedAt);
         entity.setUser(user);
         return entity;
     }
@@ -44,13 +48,11 @@ public class ArticleDto {
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
         dto.setContent(entity.getContent());
-        dto.setDeletedAt(entity.getDeletedAt());
         dto.setUsername(entity.getUser().getUsername());
 
         List<ArticleImageEntity> articleImages = entity.getArticleImages();
         if (articleImages != null && !articleImages.isEmpty()) {
-            dto.setArticleImages(articleImages.stream().map(ArticleImageDto::fromEntity).collect(Collectors.toList()));
-            dto.setArticleImg(dto.getArticleImages().get(0).getImageUrl());
+            dto.setArticleImg(articleImages.stream().map(ArticleImageDto::fromEntity).collect(Collectors.toList()).get(0).getImageUrl());
         }
         return dto;
     }
@@ -60,13 +62,13 @@ public class ArticleDto {
         dto.setId(entity.getId());
         dto.setTitle(entity.getTitle());
         dto.setContent(entity.getContent());
-        dto.setDeletedAt(entity.getDeletedAt());
         dto.setUsername(entity.getUser().getUsername());
 
         List<ArticleImageEntity> articleImages = entity.getArticleImages();
         if (articleImages != null && !articleImages.isEmpty()) {
             dto.setArticleImages(articleImages.stream().map(ArticleImageDto::fromEntity).collect(Collectors.toList()));
         }
+        dto.setArticleImg(null);
         return dto;
     }
 
