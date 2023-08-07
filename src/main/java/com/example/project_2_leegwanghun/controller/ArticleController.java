@@ -3,7 +3,6 @@ package com.example.project_2_leegwanghun.controller;
 
 import com.example.project_2_leegwanghun.dto.ArticleDto;
 import com.example.project_2_leegwanghun.dto.ResponseDto;
-import com.example.project_2_leegwanghun.entity.UserEntity;
 import com.example.project_2_leegwanghun.service.ArticleService;
 import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
@@ -92,4 +91,5 @@ public class ArticleController {
         response.setMessage("피드가 삭제되었습니다.");
         return response;
     }
+
 }

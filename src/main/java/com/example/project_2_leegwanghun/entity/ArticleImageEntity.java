@@ -3,7 +3,7 @@ package com.example.project_2_leegwanghun.entity;
 
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
+
 
 
 @Data

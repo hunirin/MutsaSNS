@@ -27,4 +27,15 @@ public class CommentController {
         response.setMessage("댓글이 등록되었습니다.");
         return response;
     }
+
+    // 댓글 삭제
+    @DeleteMapping("/{commentId}")
+    public ResponseDto delete(
+            @PathVariable Long articleId,
+            @PathVariable Long commentId
+    ) {
+        commentService.deleteComment(articleId, commentId);
+        response.setMessage("피드가 삭제되었습니다.");
+        return response;
+    }
 }

@@ -3,6 +3,7 @@ package com.example.project_2_leegwanghun.dto;
 import com.example.project_2_leegwanghun.entity.ArticleEntity;
 import com.example.project_2_leegwanghun.entity.CommentEntity;
 import com.example.project_2_leegwanghun.entity.UserEntity;
+import com.fasterxml.jackson.annotation.JsonIgnore;
 import lombok.Data;
 
 @Data
@@ -10,6 +11,9 @@ public class CommentDto {
     private Long commentId;
 
     private String content;
+
+    @JsonIgnore
+    private boolean deletedAt;
 
     // 댓글 작성자 저장
     private String username;

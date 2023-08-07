@@ -37,6 +37,19 @@ public class CommentService {
         commentRepository.save(commentDto.newEntity(userEntity, articleEntity));
     }
 
+    // Delete
+    // 댓글 삭제
+    public void deleteComment(Long id, Long commentId) {
+        Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
+        if (optionalArticle.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        Optional<CommentEntity> optionalComment = commentRepository.findById(commentId);
+        if (optionalComment.isEmpty())
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+
+        commentRepository.deleteById(commentId);
+    }
 
     // 유저 찾는 메소드
     private UserEntity getUserEntity(Authentication authentication) {

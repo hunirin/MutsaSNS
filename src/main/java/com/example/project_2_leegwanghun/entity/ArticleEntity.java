@@ -41,5 +41,9 @@ public class ArticleEntity {
     @OneToMany(mappedBy = "articles", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArticleImageEntity> articleImages = new ArrayList<>();
 
+    @OneToMany(mappedBy = "articles", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<HeartEntity> hearts = new ArrayList<>();
+
+
 
 }
