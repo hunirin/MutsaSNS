@@ -49,7 +49,6 @@ public class ArticleController {
             @RequestParam(value = "page", defaultValue = "0") Integer page,
             @RequestParam(value = "limit", defaultValue = "20") Integer limit
     ) {
-
         return articleService.readArticlePaged(page, limit);
     }
 
@@ -58,8 +57,6 @@ public class ArticleController {
     public ArticleDto readOne(
             @PathVariable Long articleId
     ) {
-        ArticleDto articleDto = articleService.readArticleOne(articleId);
-        articleDto.setArticleImg(null);
         return articleService.readArticleOne(articleId);
     }
 

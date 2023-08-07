@@ -35,8 +35,10 @@ public class ArticleEntity {
     @JoinColumn(name = "user_id")
     private UserEntity user;
 
-    @OneToMany
-    @JoinColumn(name = "article")
+    @OneToMany(mappedBy = "articles", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<CommentEntity> comments = new ArrayList<>();
+
+    @OneToMany(mappedBy = "articles", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<ArticleImageEntity> articleImages = new ArrayList<>();
 
 

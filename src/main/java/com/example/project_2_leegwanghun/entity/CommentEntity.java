@@ -1,24 +1,25 @@
 package com.example.project_2_leegwanghun.entity;
 
-
 import jakarta.persistence.*;
 import lombok.Data;
-import org.springframework.web.multipart.MultipartFile;
-
 
 @Data
 @Entity
-@Table(name = "articleImg")
-public class ArticleImageEntity {
+@Table(name = "comment")
+public class CommentEntity {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    private Long commentId;
 
-    private String imageUrl;
+    private String content;
+
+    private String username;
 
     @ManyToOne
     @JoinColumn(name = "article_id")
     private ArticleEntity articles;
 
-
+    @ManyToOne
+    @JoinColumn(name = "user_id")
+    private UserEntity user;
 }

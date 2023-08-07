@@ -35,7 +35,6 @@ import java.util.Optional;
 public class ArticleService {
     private final ArticleRepository articleRepository;
     private final ArticleImageRepository articleImageRepository;
-    private final JwtTokenUtils jwtTokenUtils;
     private final UserRepository userRepository;
 
     // POST
@@ -90,7 +89,6 @@ public class ArticleService {
             ArticleImageEntity articleImageEntity = new ArticleImageEntity();
             articleImageEntity.setImageUrl(articleImagePath);
 
-            articleImageEntity.setUser(userEntity);
             articleImageEntity.setArticles(articleEntity);
 
             articleImageRepository.save(articleImageEntity);
@@ -220,10 +218,6 @@ public class ArticleService {
     public void deleteArticle(Long id) {
         Optional<ArticleEntity> optionalArticle = articleRepository.findById(id);
         if (optionalArticle.isEmpty()) throw new ResponseStatusException(HttpStatus.NOT_FOUND);
-
-//        ArticleEntity articleEntity = optionalArticle.get();
-//        articleEntity.setDeletedAt(true);
-//        articleRepository.save(articleEntity);
 
         articleRepository.deleteById(id);
     }

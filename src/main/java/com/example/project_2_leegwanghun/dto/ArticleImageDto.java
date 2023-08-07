@@ -13,13 +13,6 @@ public class ArticleImageDto {
 
     private String imageUrl;
 
-    public ArticleImageEntity newEntity(ArticleEntity article, UserEntity user) {
-        ArticleImageEntity entity = new ArticleImageEntity();
-        entity.setArticles(article);
-        entity.setImageUrl(entity.getImageUrl());
-        entity.setUser(user);
-        return entity;
-    }
 
     public static ArticleImageDto fromEntity(ArticleImageEntity image) {
         ArticleImageDto dto = new ArticleImageDto();

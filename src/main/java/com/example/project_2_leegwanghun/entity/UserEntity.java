@@ -29,6 +29,7 @@ public class UserEntity {
     @OneToMany(mappedBy = "user")
     private List<ArticleEntity> articles = new ArrayList<>();
 
+
     @OneToMany(mappedBy = "user")
-    private List<ArticleImageEntity> articleImages = new ArrayList<>();
+    private List<CommentEntity> comments = new ArrayList<>();
 }
