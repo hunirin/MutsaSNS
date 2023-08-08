@@ -1,11 +1,9 @@
 package com.example.project_2_leegwanghun.service;
 
 import com.example.project_2_leegwanghun.dto.ArticleDto;
-import com.example.project_2_leegwanghun.dto.ArticleImageDto;
 import com.example.project_2_leegwanghun.entity.ArticleEntity;
 import com.example.project_2_leegwanghun.entity.ArticleImageEntity;
 import com.example.project_2_leegwanghun.entity.UserEntity;
-import com.example.project_2_leegwanghun.jwt.JwtTokenUtils;
 import com.example.project_2_leegwanghun.repository.ArticleImageRepository;
 import com.example.project_2_leegwanghun.repository.ArticleRepository;
 import com.example.project_2_leegwanghun.repository.UserRepository;
@@ -26,7 +24,6 @@ import java.nio.file.Files;
 import java.nio.file.Path;
 import java.time.LocalDateTime;
 import java.time.format.DateTimeFormatter;
-import java.util.List;
 import java.util.Optional;
 
 @Slf4j

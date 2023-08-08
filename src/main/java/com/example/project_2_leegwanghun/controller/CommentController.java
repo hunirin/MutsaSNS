@@ -35,7 +35,7 @@ public class CommentController {
             @PathVariable Long commentId
     ) {
         commentService.deleteComment(articleId, commentId);
-        response.setMessage("피드가 삭제되었습니다.");
+        response.setMessage("댓글이 삭제되었습니다.");
         return response;
     }
 }

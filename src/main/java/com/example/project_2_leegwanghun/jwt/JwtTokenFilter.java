@@ -1,6 +1,6 @@
 package com.example.project_2_leegwanghun.jwt;
 
-import com.example.project_2_leegwanghun.dto.UserDto;
+
 import com.example.project_2_leegwanghun.service.UserService;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;

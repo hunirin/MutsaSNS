@@ -1,0 +1,696 @@
+{
+	"info": {
+		"_postman_id": "f541a7c2-38c1-4456-ad50-575de839cf69",
+		"name": "Project_2",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "28078270"
+	},
+	"item": [
+		{
+			"name": "회원가입",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/register?username=sanghun&password=123&passwordCheck=123&phone=010-1234-4567&email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"register"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "sanghun"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						},
+						{
+							"key": "passwordCheck",
+							"value": "123"
+						},
+						{
+							"key": "phone",
+							"value": "010-1234-4567"
+						},
+						{
+							"key": "email",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "로그인 (JWT 발급)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"sanghun\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "회원가입 (다른유저)",
+			"request": {
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/register?username=panghun&password=123&passwordCheck=123&phone=&email",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"register"
+					],
+					"query": [
+						{
+							"key": "username",
+							"value": "panghun"
+						},
+						{
+							"key": "password",
+							"value": "123"
+						},
+						{
+							"key": "passwordCheck",
+							"value": "123"
+						},
+						{
+							"key": "phone",
+							"value": ""
+						},
+						{
+							"key": "email",
+							"value": null
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "로그인 (다른유저)",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"username\": \"panghun\",\r\n    \"password\": \"123\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/login",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"login"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "유저 조회",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							""
+						],
+						"type": "text/javascript"
+					}
+				}
+			],
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "프로필 이미지 등록",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/LGH/Desktop/사진/문상훈/study.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/users/profileImg",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"profileImg"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "피드 생성",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJwYW5naHVuIiwiaWF0IjoxNjkxNDg5NTM2LCJleHAiOjE2OTE0OTMxMzZ9.dz5IDx6rmLtwOQ3YPvxZ-qaF-7TpEathz-O5DQxm9eXfPYdz89zNXdT6lPzGn_kD",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"ootd\",\r\n    \"content\": \"나의 깜찍한모습\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/article",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "이미지 업로드",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "image",
+							"type": "file",
+							"src": "/C:/Users/LGH/Desktop/사진/문상훈/study.jpg"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "피드 조회 (전체)",
+			"request": {
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/article/list",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"list"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "피드 조회 (단독)",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "피드 수정",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"title\": \"BDNS\",\r\n    \"content\": \"moonssaem\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "피드 이미지 추가/삭제",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "updateImage",
+							"contentType": "application/json",
+							"type": "file",
+							"src": "/C:/Users/LGH/Desktop/사진/문상훈/KakaoTalk_20230804_133052426_03.jpg",
+							"disabled": true
+						},
+						{
+							"key": "deleteImage",
+							"value": "2",
+							"contentType": "application/json",
+							"type": "text"
+						}
+					]
+				},
+				"url": {
+					"raw": "http://localhost:8080/article/1/image",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1",
+						"image"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "피드 삭제",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NDE0LCJleHAiOjE2OTE0OTMwMTR9.fJ-SvxMyj45iO7Ua3Qdjqj83z_JG1LdYCoh5bvdCOmm1zhLUGvlE2VPuc4LlB9mK",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/article/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "댓글 생성",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NTI4LCJleHAiOjE2OTE0OTMxMjh9.9T_hiknus4OVx52rMa6vQ_pBlgMOTWgpGyhyvg_ZBZTR0z1Ff7O_bSASSDNpNvF6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\r\n    \"content\": \"퍼가요\"\r\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "http://localhost:8080/article/1/comment",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1",
+						"comment"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "댓글 삭제",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDg5NTI4LCJleHAiOjE2OTE0OTMxMjh9.9T_hiknus4OVx52rMa6vQ_pBlgMOTWgpGyhyvg_ZBZTR0z1Ff7O_bSASSDNpNvF6",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/article/1/comment/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1",
+						"comment",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "좋아요",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJwYW5naHVuIiwiaWF0IjoxNjkxNDg5NTM2LCJleHAiOjE2OTE0OTMxMzZ9.dz5IDx6rmLtwOQ3YPvxZ-qaF-7TpEathz-O5DQxm9eXfPYdz89zNXdT6lPzGn_kD",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/article/1/heart",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"article",
+						"1",
+						"heart"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "팔로우",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJwYW5naHVuIiwiaWF0IjoxNjkxNDg5NTM2LCJleHAiOjE2OTE0OTMxMzZ9.dz5IDx6rmLtwOQ3YPvxZ-qaF-7TpEathz-O5DQxm9eXfPYdz89zNXdT6lPzGn_kD",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/follow/1",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"follow",
+						"1"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "언팔로우",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJzYW5naHVuIiwiaWF0IjoxNjkxNDU2OTQ5LCJleHAiOjE2OTE0NjA1NDl9.mHpGMwMaNepA8Za0g6QGIpDKv8JtYf6-mpmqV7UPiwR9rA51kHTbuAZBqUb4KyN3",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/unfollow/2",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"unfollow",
+						"2"
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "팔로우 피드 조회",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "eyJhbGciOiJIUzM4NCJ9.eyJzdWIiOiJwYW5naHVuIiwiaWF0IjoxNjkxNDg5NTM2LCJleHAiOjE2OTE0OTMxMzZ9.dz5IDx6rmLtwOQ3YPvxZ-qaF-7TpEathz-O5DQxm9eXfPYdz89zNXdT6lPzGn_kD",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:8080/users/follow",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "8080",
+					"path": [
+						"users",
+						"follow"
+					]
+				}
+			},
+			"response": []
+		}
+	]
+}

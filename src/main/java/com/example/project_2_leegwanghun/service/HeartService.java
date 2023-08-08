@@ -1,6 +1,6 @@
 package com.example.project_2_leegwanghun.service;
 
-import com.example.project_2_leegwanghun.dto.HeartDto;
+
 import com.example.project_2_leegwanghun.entity.ArticleEntity;
 import com.example.project_2_leegwanghun.entity.HeartEntity;
 import com.example.project_2_leegwanghun.entity.UserEntity;
@@ -32,11 +32,11 @@ public class HeartService {
 
         // 피드 작성자와 로그인 유저가 다르면 좋아요 가능
         if (article.getUser() != user) {
-            // 이미 좋아요 되어있으면 좋아요 취소
             if (heartRepository.findByUserAndArticles(user, article) == null) {
                 HeartEntity heartEntity = new HeartEntity(user, article);
                 heartRepository.save(heartEntity);
             } else {
+                // 이미 좋아요 되어있으면 좋아요 취소
                 HeartEntity heartEntity = heartRepository.findByUserAndArticles(user, article);
                 heartEntity.unHeartEntity();
                 heartRepository.delete(heartEntity);

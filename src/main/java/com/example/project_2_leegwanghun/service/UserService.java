@@ -8,7 +8,6 @@ import lombok.RequiredArgsConstructor;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.parameters.P;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
@@ -113,12 +112,22 @@ public class UserService implements UserDetailsManager{
         userRepository.save(userEntity);
     }
 
+    // 유저 정보 조회
+    public UserDto readUser(Long id) {
+        Optional<UserEntity> optionalUser = userRepository.findById(id);
+        if (optionalUser.isPresent()) return UserDto.fromEntity2(optionalUser.get());
+        else throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+    }
+
+
+
+
+
     // 인증된 정보로 유저를 찾는 메소드
     private UserEntity getUserEntity(Authentication authentication) {
         return userRepository.findByUsername(authentication.getName())
                 .orElseThrow(() -> new ResponseStatusException(HttpStatus.NOT_FOUND));
     }
-
 
     @Override
     public boolean userExists(String username) {

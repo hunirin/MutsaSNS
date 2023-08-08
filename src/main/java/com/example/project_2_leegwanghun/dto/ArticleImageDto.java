@@ -1,8 +1,6 @@
 package com.example.project_2_leegwanghun.dto;
 
-import com.example.project_2_leegwanghun.entity.ArticleEntity;
 import com.example.project_2_leegwanghun.entity.ArticleImageEntity;
-import com.example.project_2_leegwanghun.entity.UserEntity;
 import lombok.Data;
 
 import java.util.List;

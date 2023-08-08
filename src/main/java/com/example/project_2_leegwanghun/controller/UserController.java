@@ -73,4 +73,12 @@ public class UserController {
         response.setMessage("프로필 이미지가 등록되었습니다.");
         return response;
     }
+
+    // 유저 조회
+    @GetMapping("/{id}")
+    public UserDto readUser(
+            @PathVariable Long id
+    ) {
+        return service.readUser(id);
+    }
 }

@@ -9,11 +9,10 @@
    > 사진이 포함된 피드를 올려 다른 사용자들과 공유하는 SNS 서비스
 #### 🔺 주요 기능
    - Spring Security를 이용해 회원가입 및 로그인을 구현
-   - 로그인을 통해 JWT를 발급받아 인증된 상태에서 기능을 이용가능하게 구현
-   - 유저의 대표이미지를 추가하지 않으면 기본 이미지로 표시
-   - 피드 전체 조회 시 첫번째 이미지를 표시
-   - 피드를 삭제 시 soft delete가 되도록 구현
-   - 
+   - 피드를 추가/삭제/조회, 피드에 이미지를 추가/삭제 구현
+   - 댓글 작성/삭제/조회 구현
+   - 좋아요 기능 구현
+   - 팔로우/언팔로우 기능 구현
 
  ## ✅ Project Guide
   #### 🔺 요구사항
@@ -22,84 +21,168 @@
       - Language level: 17 - Sealed types, always-stric floating-point semantics
     • Postman 2.1
   #### 🔺 설치 방법
-    $ git clone https://github.com/likelion-backend-5th/MiniProject_Basic_LeeGwanghun
+    $ git clone https://github.com/likelion-backend-5th/Project_2_LeeGwanghun
   #### 🔺 테스트 방법
 1. 프로젝트를 실행 
-2. ```Project_1.postman_collection.json``` 파일을 Postman으로 불러옴
-3. ```POST /users/register```로 회원가입을 함
-4. ```POST /token/issue```로 JWT를 발급받음
-5. 이후 ```Params```에 username, password를 입력, ```Auth```에서 Bearer Token에 token에 JWT를 넣고 사용
+2. ```Project_2.postman_collection.json``` 파일을 Postman으로 불러옴
+3. ```회원 가입```으로 가입하고, ```로그인``` 시 JWT 발급
+4. 발급받은 ```JWT```로 ```Auth```의 ```Bearer Token```에 넣어 기능을 이용 가능
 
- ## ✅ Update ( 1일차 ~ 3일차 ) 
-   ( 🔹 추가 / 🔸 수정 )
-### 📂 config 
-     🔹 PasswordEncoderConfig : 비밀번호를 암호화하기위한 config
-     🔹 WebSecurityConfig : URL로 오는 요청에 대해 필터링하는 보안 config
-### 📂 controller
-     🔸 CommentController, ItemController, ProposalController
-        : @RequestParam을 통해 username과 password를 받도록 수정,
-          READ 기능엔 "/read"를 추가해 누구나 접근할 수 있도록 수정
-     🔹 TokenController : 가입된 유저 정보를 입력하면 token(JWT)를 발급
-     🔹 UserController : username과 password, password-check를 받아 회원가입을 시켜줌
-### 📂 dto
-     🔸 CommentDto, ItemDto, ProposalDto
-        : writer와 password를 삭제하고 username이 저장될 수 있도록 수정,
-     🔹 CustomUserDetails : UserDetails 인터페이스를 통해 유저 정보를 저장
-### 📂 entity ( 연결 관계는 ERD 참고 )
-     🔹 AuthorityEntity : 권한의 정보를 저장하는 entity
-     🔹 RoleEntity : 역할의 정보를 저장하는 entity
-     🔹 UserEntity : 유저의 정보를 저장하는 entity
-     🔸 CommentEntity, ItemEntity, ProposalEntity
-        : writer, password 삭제하고 username 추가
-### 📂 jwt
-     🔹 JwtRequestDto : JWT 발급에 필요한 유저 정보를 저장
-     🔹 JwtTokenDto : token(JWT)를 저장
-     🔹 JwtTokenFilter : 사용자의 JWT를 해석하고, 사용자가 인증된 상태인지 확인
-     🔹 JwtTokenUtils : JWT 관련 기능들을 넣어놓음
-### 📂 repository
-     🔹 AuthorityRepository, RoleRepository, UserRepository 추가
-### 📂 service
-     🔹 JpaUserDetailsManager : Spring Security Filter에서 필요한 사용자 정보를 활용
-     🔸 CommentService, ItemService, ProposalService
-        : 인증된 상태의 유저로 로그인해야 기능을 사용할 수 있게 수정,
-          READ 기능은 "/read"를 추가해 누구나 접근할 수 있게 수정
+## ✅ RestAPI 🟨🟩🟦🟥
+<details>
+<summary> <b>📂 UserController </b> </summary>
+<details>
+<summary>🟨 <b>회원가입</b> : POST /users/register</summary>
 
-## ✅ Update ( 4일차 ~ 6일차 )
+![img_1.png](readmeImage/img_1.png)
 
-### 💡 _로그인 하지않고는 다른 기능을 이용할 수 없음 (회원가입은 가능)_
+</details>
 
-### 📄 HTML + CSS
-     🔹 로그인 : 회원 가입을 통해 가입된 정보로 로그인
-                +) 정보를 입력하지 않을 시 애니메이션 추가
-                👉 http://localhost:8080/view/login
-     🔹 회원가입 : 기입된 정보로 회원 등록
-                +) 정보를 입력하지 않을 시 애니메이션 추가
-                (폰번호, 이메일, 주소는 필수 아님)
-                👉 http://localhost:8080/view/register
-     🔹 홈 화면 : 로그인 시 뜨는 첫 화면, 물품 등록, 물품 조회, 로그아웃 버튼이 있음
-                +) 로그아웃 시 로그인 화면으로 돌아감
-                👉 http://localhost:8080/view/home
-     🔹 물품 등록 : 물품을 등록하는 화면
-                +) 제목, 최소 가격, 내용을 입력할 수 있음
-                👉 http://localhost:8080/view/write
-     🔹 물품 조회 (전체) : 등록된 물품들을 전부 보는 화면
-                +) 번호, 제목, 작성자, 상태만 표시됨
-                +) 물품의 번호 혹은 제목 클릭시 물품으로 이동
-                👉 http://localhost:8080/view/itemList
-     🔹 물품 조회 (개별) : 등록된 물품을 보는 화면
-                +) 번호, 제목, 최소가격, 상태, 내용까지 표시됨
-                +) 물품의 번호 혹은 제목 클릭시 물품으로 이동
-                👉 http://localhost:8080/view/itemOne/{id}
-     🔹 물품 삭제 : 물품(개별)에서 삭제버튼을 누르면 물품 삭제
-                +) 물품의 번호 혹은 제목 클릭시 물품으로 이동
-                👉 http://localhost:8080/view/itemOne/{id}
-### 📂 config
-     🔸 WebSecurity : formLogin을 사용하도록 수정
-### 📂 controller
-     🔹 ViewController : HTML을 통해 필요한 데이터에 따라 새로운 엔드포인트 생성
+<details>
+<summary>🟨 <b>로그인</b> : POST /users/login </summary>
+
+![img_2.png](readmeImage/img_2.png)
+
+</details>
 
 
-  
+<details>
+<summary> 🟩 <b>유저 조회</b> : GET /users/{id} </summary>
+
+![img_3.png](readmeImage/img_3.png)
+
+</details>
+
+<details>
+<summary>🟨 <b>프로필 이미지 등록</b> : POST /users/profileImg</summary>
+
+![img_4.png](readmeImage/img_4.png)
+
+</details>
+</details>
+
+<br>
+
+<details>
+<summary> <b>📂 ArticleController </b> </summary>
+<details>
+<summary>🟨 <b>피드 생성</b> : POST /article </summary>
+
+![img_5.png](readmeImage/img_5.png)
+
+</details>
+
+<details>
+<summary>🟨 <b>이미지 업로드</b> : POST /article/{ArticleId}</summary>
+
+![img_6.png](readmeImage/img_6.png)
+
+</details>
+
+<details>
+<summary>🟩 <b>피드 조회(전체)</b> : GET /article/list</summary>
+
+![img_8.png](readmeImage/img_8.png)
+
+</details>
+
+<details>
+<summary>🟩 <b>피드 조회(단독)</b> : GET /article/{articleId}</summary>
+
+![img_9.png](readmeImage/img_9.png)
+
+</details>
+<details>
+<summary>🟦 <b>피드 수정</b> : PUT /article/{articleId}</summary>
+
+![img_10.png](readmeImage/img_10.png)
+
+</details>
+<details>
+<summary>🟦 <b>피드 이미지 추가/삭제(단독)</b> : PUT /article/{articleId}/image</summary>
+
+![img_11.png](readmeImage/img_11.png)
+
+</details>
+<details>
+<summary>🟥 <b>피드 삭제</b> : DELETE /article/{articleId}</summary>
+
+![img_12.png](readmeImage/img_12.png)
+
+</details>
+</details>
+
+<br>
+
+<details>
+<summary> <b>📂 CommentController </b> </summary>
+<details>
+<summary>🟨 <b>댓글 생성</b> : POST /article/{articleId}/comment </summary>
+
+![img_13.png](readmeImage/img_13.png)
+
+</details>
+<details>
+<summary>🟥 <b>댓글 삭제</b> : DELETE /article/{articleId}/comment/{commentId} </summary>
+
+![img_14.png](readmeImage/img_14.png)
+
+</details>
+</details>
+
+<br>
+
+<details>
+<summary> <b>📂 HeartController </b> </summary>
+<details>
+<summary>🟨 <b>좋아요</b> : POST /article/{articleId}/heart </summary>
+
+![img_15.png](readmeImage/img_15.png)
+
+</details>
+</details>
+
+<br>
+
+<details>
+<summary> <b>📂 HeartController </b> </summary>
+<details>
+<summary>🟨 <b>팔로우</b> : POST /users/follow/{id} </summary>
+
+![img_16.png](readmeImage/img_16.png)
+
+</details>
+<details>
+<summary>🟨 <b>언팔로우</b> : POST /users/unfollow/{id} </summary>
+
+![img_17.png](readmeImage/img_17.png)
+
+</details>
+<details>
+<summary>🟩 <b>팔로우 피드 조회</b> : GET /users/follow </summary>
+
+![img_18.png](readmeImage/img_18.png)
+
+</details>
+</details>
+
+
+
+
+## ⚙ 기술 스택
+<p>
+<img src="https://img.shields.io/badge/Java_17-007396?style=flat&logo=OpenJDK&logoColor=white">
+<img src="https://img.shields.io/badge/gradle_8.1.1-02303A?style=flat&logo=gradle&logoColor=white">
+<img src="https://img.shields.io/badge/SQLite_3.41.2.2-003B57?style=flat&logo=SQLite&logoColor=white">
+</p>
+<p>
+<img src="https://img.shields.io/badge/Spring_6.0.10-6DB33F?style=flat&logo=Spring&logoColor=white">
+<img src="https://img.shields.io/badge/springboot_3.1.2-6DB33F?style=flat&logo=springboot&logoColor=white">
+<img src="https://img.shields.io/badge/springsecurity_6.1.1-6DB33F?style=flat&logo=springsecurity&logoColor=white">
+</p>
+<img src="https://img.shields.io/badge/thymeleaf_3.1.1-005F0F?style=flat&logo=thymeleaf&logoColor=white">
+
+<br>
 
  ## ✅ Info
   ### 이광훈 ☺️
