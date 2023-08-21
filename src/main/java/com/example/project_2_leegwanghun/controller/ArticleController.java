@@ -70,7 +70,7 @@ public class ArticleController {
         return response;
     }
 
-    // 피드 이미지 추가/삭제
+    // 피드 이미지 추가
     @PutMapping("/{articleId}/image")
     public ResponseDto updateImage(
             @PathVariable Long articleId,
