@@ -180,7 +180,7 @@
 <img src="https://img.shields.io/badge/springboot_3.1.2-6DB33F?style=flat&logo=springboot&logoColor=white">
 <img src="https://img.shields.io/badge/springsecurity_6.1.1-6DB33F?style=flat&logo=springsecurity&logoColor=white">
 </p>
-<img src="https://img.shields.io/badge/thymeleaf_3.1.1-005F0F?style=flat&logo=thymeleaf&logoColor=white">
+
 
 <br>
 
