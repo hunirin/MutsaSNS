@@ -28,7 +28,7 @@
 3. ```회원 가입```으로 가입하고, ```로그인``` 시 JWT 발급
 4. 발급받은 ```JWT```로 ```Auth```의 ```Bearer Token```에 넣어 기능을 이용 가능
 
-## ✅ RestAPI 🟨🟩🟦🟥
+## ✅ RestAPI 
 <details>
 <summary> <b>📂 UserController </b> </summary>
 <details>
